@@ -13,14 +13,14 @@ extension AppDelegate: CLLocationManagerDelegate {
         
     func sendLocalNotificationWithMessage(message: String!) {
         let notification:UILocalNotification = UILocalNotification()
+        notification.category = "blucomm.ibeacon"
         notification.alertBody = message
+        notification.soundName = UILocalNotificationDefaultSoundName
         UIApplication.shared().scheduleLocalNotification(notification)
     }
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-        
-        print("didRangeBeacons")
-        
+                
         if beacons.count > 0 {
             let currentTime = Int(NSDate().timeIntervalSince1970)
             let savedTime = userDefaults.integer(forKey: "blucomm.savedtime")

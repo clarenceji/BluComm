@@ -46,12 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationManager!.delegate = self
         locationManager!.pausesLocationUpdatesAutomatically = false
         
-        if #available(iOS 9.0, *) {
-            locationManager?.allowsBackgroundLocationUpdates = true
-        } else {
-            // Fallback on earlier versions
-        }
-        
+        locationManager?.allowsBackgroundLocationUpdates = true
+
         locationManager!.startMonitoring(for: beaconRegion)
         locationManager!.startRangingBeacons(in: beaconRegion)
         // locationManager!.startUpdatingLocation()
@@ -81,11 +77,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        let currentVC = self.window!.rootViewController! as UIViewController
-        let alertView = UIAlertController(title: "iBeacon found!", message: nil, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         
-        currentVC.present(alertView, animated: true, completion: nil)
+        if notification.category == "blucomm.ibeacon" {
+            let currentVC = self.window!.rootViewController! as UIViewController
+            
+            let alertView = UIAlertController(title: "iBeacon found!", message: nil, preferredStyle: .alert)
+            alertView.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            
+            currentVC.present(alertView, animated: true, completion: nil)
+        }
+        
     }
 
 

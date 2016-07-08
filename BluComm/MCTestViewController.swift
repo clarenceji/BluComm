@@ -18,6 +18,8 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     @IBOutlet var txtViewLog: UITextView!
     @IBOutlet var labelConnCount: UILabel!
     
+    private var isAppInBackground = false
+    
     private let kServiceType = "blucomm"
     private var serviceStarted = false
     private let myPeerID: MCPeerID = MCPeerID(displayName: UIDevice.current().name)
@@ -32,6 +34,11 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // App Goes to Background Notification
+        let notificationCenter = NotificationCenter.default()
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: .UIApplicationWillResignActive, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: .UIApplicationWillEnterForeground, object: nil)
 
         // Do any additional setup after loading the view.
         self.txtFieldMsg.delegate = self
@@ -64,6 +71,14 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         return false
     }
     
+    func appMovedToBackground() {
+        self.isAppInBackground = true
+    }
+    
+    func appMovedToForeground() {
+        self.isAppInBackground = false
+    }
+    
     // MARK: - Advertiser
 
 //    func initAdvertiser() {
@@ -84,13 +99,18 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: (Bool, MCSession?) -> Void) {
         
         addTextToLog(text: "💌 Invitation Received from Peer: \(peerID.displayName)")
-//        let alertView = UIAlertController(title: "Inivation Received!", message: "Peer name: \(peerID.displayName)", preferredStyle: .alert)
-//        alertView.addAction(UIAlertAction(title: "Accept", style: .default, handler: { (aa) in
-//            invitationHandler(true, self.session)
-//        }))
-//        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        
-//        self.present(alertView, animated: true, completion: nil)
+        
+        /*
+         
+        let alertView = UIAlertController(title: "Inivation Received!", message: "Peer name: \(peerID.displayName)", preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Accept", style: .default, handler: { (aa) in
+            invitationHandler(true, self.session)
+        }))
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alertView, animated: true, completion: nil)
+        
+        */
         
         invitationHandler(true, self.session)
         
@@ -116,14 +136,18 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         
         addTextToLog(text: "💯 Found Peer: \(peerID.displayName)")
         
-//        let alertView = UIAlertController(title: "Found Peer!", message: "Peer name: \(peerID.displayName)", preferredStyle: .alert)
-//        alertView.addAction(UIAlertAction(title: "Invite", style: .default, handler: { (aa) in
-//            browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
-//        }))
-//        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        
-//        self.present(alertView, animated: true, completion: nil)
+        /*
+         
+        let alertView = UIAlertController(title: "Found Peer!", message: "Peer name: \(peerID.displayName)", preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Invite", style: .default, handler: { (aa) in
+            browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
+        }))
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        self.present(alertView, animated: true, completion: nil)
+        
+        */
+ 
         browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
         
         
@@ -227,9 +251,22 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     
     // Received data from remote peer.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        
         let string = String(data: data, encoding: .utf8)
         print("Did receive data: \(string!)")
         addTextToLog(text: peerID.displayName + ": " + string!)
+        
+        if self.isAppInBackground {
+            
+            print("blucomm.multipeerconn notification")
+            let notification = UILocalNotification()
+            notification.category = "blucomm.multipeerconn"
+            notification.alertBody = peerID.displayName + ": " + string!
+            notification.soundName = UILocalNotificationDefaultSoundName
+            UIApplication.shared().scheduleLocalNotification(notification)
+            
+        }
+        
     }
     
     
