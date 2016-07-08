@@ -14,6 +14,7 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     @IBOutlet var txtFieldName: UITextField!
     @IBOutlet var txtFieldMsg: UITextField!
     @IBOutlet var btnStart: UIButton!
+    @IBOutlet var btnSend: UIButton!
     @IBOutlet var txtViewLog: UITextView!
     @IBOutlet var labelConnCount: UILabel!
     
@@ -36,6 +37,8 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         self.txtFieldMsg.delegate = self
         self.txtFieldName.delegate = self
         
+        self.txtFieldMsg.addTarget(self, action: #selector(MCTestViewController.textFieldDidChange(_:)), for: .editingChanged)
+        
         self.advertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: kServiceType)
         
         self.browser = MCNearbyServiceBrowser(peer: myPeerID, serviceType: kServiceType)
@@ -45,6 +48,14 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         
         self.browser.delegate = self
 //        self.browser.startBrowsingForPeers()
+        
+    }
+    
+    func textFieldDidChange(_ textField: UITextField) {
+        
+        DispatchQueue.main.async(execute: {
+            self.btnSend.isEnabled = textField.text != "" ? true : false
+        })
         
     }
     
@@ -82,14 +93,6 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
 //        self.present(alertView, animated: true, completion: nil)
         
         invitationHandler(true, self.session)
-        
-        let string = "Hello"
-        let data = string.data(using: .utf8)!
-        do {
-            try session.send(data, toPeers: [peerID], with: .reliable)
-        } catch {
-            addTextToLog(text: "\(error)")
-        }
         
     }
     
@@ -166,6 +169,24 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     
     @IBAction func btnSendTapped(_ sender: AnyObject) {
         
+        if txtFieldMsg.text != "" {
+            let string = txtFieldMsg.text!
+            let data = string.data(using: .utf8)!
+            do {
+                try session.send(data, toPeers: self.session.connectedPeers, with: .reliable)
+                addTextToLog(text: "Me: \(string)")
+                
+                DispatchQueue.main.async(execute: { 
+                    self.txtFieldMsg.text = ""
+                    self.btnSend.isEnabled = false
+                })
+                
+            } catch {
+                print(error)
+                addTextToLog(text: "\(error)")
+            }
+        }
+        
     }
     
     @IBAction func btnRefreshTapped(_ sender: AnyObject) {
@@ -190,6 +211,17 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     // MARK: - Session Delegate
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         addTextToLog(text: "Peer status changed: \(state.rawValue)")
+        if state.rawValue == 2 {
+            // Connected
+            addTextToLog(text: "\(peerID.displayName) says hello!")
+            let string = "Hello"
+            let data = string.data(using: .utf8)!
+            do {
+                try session.send(data, toPeers: [peerID], with: .reliable)
+            } catch {
+                addTextToLog(text: "\(error)")
+            }
+        }
     }
     
     
@@ -197,7 +229,7 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         let string = String(data: data, encoding: .utf8)
         print("Did receive data: \(string!)")
-        addTextToLog(text: string!)
+        addTextToLog(text: peerID.displayName + ": " + string!)
     }
     
     

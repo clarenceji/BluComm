@@ -27,7 +27,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVW-q4-fET">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVW-q4-fET">
                                 <state key="normal" title="Send"/>
                                 <connections>
                                     <action selector="btnSendTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eHU-uq-eF6"/>
@@ -91,6 +91,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="MCTest" id="zXX-TN-vtt"/>
                     <connections>
+                        <outlet property="btnSend" destination="SVW-q4-fET" id="Je8-VB-Ale"/>
                         <outlet property="btnStart" destination="LkL-dk-l7b" id="kD1-gy-CYx"/>
                         <outlet property="labelConnCount" destination="Nxh-Kr-e29" id="h0I-Um-e7f"/>
                         <outlet property="txtFieldMsg" destination="W9j-hR-aPN" id="Sd4-WK-J3Q"/>
