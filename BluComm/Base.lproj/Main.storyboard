@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Fb9-GQ-LBE">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--MCTest-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MCTestViewController" customModule="BluComm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W9j-hR-aPN">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Display Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sdq-Xt-apj">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVW-q4-fET">
+                                <state key="normal" title="Send"/>
+                                <connections>
+                                    <action selector="btnSendTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eHU-uq-eF6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkL-dk-l7b">
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" red="0.87843137979999997" green="0.18823529780000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnStartTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Cd-pD-FcK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQ4-p7-OS8">
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="btnRefreshTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zSN-vd-KNt"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected: 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxh-Kr-e29">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhX-Ul-vzf">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Multipeer Connectivity Test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tbf-KA-So9">
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lhX-Ul-vzf" secondAttribute="bottom" constant="8" id="1OD-yH-fny"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="W9j-hR-aPN" secondAttribute="leading" id="1k1-Za-iNo"/>
+                            <constraint firstItem="LkL-dk-l7b" firstAttribute="centerY" secondItem="SVW-q4-fET" secondAttribute="centerY" id="5ym-eI-4FW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Tbf-KA-So9" secondAttribute="trailing" id="9V7-zf-eJy"/>
+                            <constraint firstItem="sdq-Xt-apj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="39" id="C68-1Q-peo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lhX-Ul-vzf" secondAttribute="trailing" id="OSH-sX-tnu"/>
+                            <constraint firstItem="W9j-hR-aPN" firstAttribute="top" secondItem="sdq-Xt-apj" secondAttribute="bottom" constant="8" id="PhM-kK-bBc"/>
+                            <constraint firstItem="SVW-q4-fET" firstAttribute="top" secondItem="W9j-hR-aPN" secondAttribute="bottom" constant="17" id="Qfp-u5-HGl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="W9j-hR-aPN" secondAttribute="trailing" id="RDD-Wn-vFU"/>
+                            <constraint firstItem="lhX-Ul-vzf" firstAttribute="top" secondItem="SVW-q4-fET" secondAttribute="bottom" constant="28" id="Wag-Hm-Skg"/>
+                            <constraint firstItem="LkL-dk-l7b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-30" id="aCB-cT-FVe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Nxh-Kr-e29" secondAttribute="trailing" id="b7U-P9-8tM"/>
+                            <constraint firstItem="Tbf-KA-So9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fYq-Yk-8ZJ"/>
+                            <constraint firstItem="SVW-q4-fET" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="30" id="frN-jr-FFa"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="sdq-Xt-apj" secondAttribute="leading" id="g1y-hw-fAl"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Tbf-KA-So9" secondAttribute="leading" id="hkc-Dl-a0W"/>
+                            <constraint firstItem="yQ4-p7-OS8" firstAttribute="top" secondItem="W9j-hR-aPN" secondAttribute="bottom" constant="17" id="mCw-cV-xiW"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="lhX-Ul-vzf" secondAttribute="leading" id="toU-LX-7ty"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yQ4-p7-OS8" secondAttribute="trailing" id="vEj-Wp-jWs"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Nxh-Kr-e29" secondAttribute="leading" id="vid-tf-0WB"/>
+                            <constraint firstItem="Nxh-Kr-e29" firstAttribute="top" secondItem="yQ4-p7-OS8" secondAttribute="bottom" constant="-1" id="x0Q-RU-tWe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sdq-Xt-apj" secondAttribute="trailing" id="xpW-rj-dRy"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="MCTest" id="zXX-TN-vtt"/>
+                    <connections>
+                        <outlet property="btnStart" destination="LkL-dk-l7b" id="kD1-gy-CYx"/>
+                        <outlet property="labelConnCount" destination="Nxh-Kr-e29" id="h0I-Um-e7f"/>
+                        <outlet property="txtFieldMsg" destination="W9j-hR-aPN" id="Sd4-WK-J3Q"/>
+                        <outlet property="txtFieldName" destination="sdq-Xt-apj" id="5V2-0L-6pZ"/>
+                        <outlet property="txtViewLog" destination="lhX-Ul-vzf" id="nQP-JB-YO6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-537" y="-34"/>
+        </scene>
+        <!--Virtual Beacon-->
+        <scene sceneID="KmX-j9-Cyi">
+            <objects>
+                <viewController id="afq-x6-BYk" customClass="BeaconViewController" customModule="BluComm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="02G-OY-iM2"/>
+                        <viewControllerLayoutGuide type="bottom" id="RdC-df-f8E"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mch-Tp-uwB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Virtual iBeacon Test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92Y-x5-Uy1">
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66M-NT-MGr">
+                                <state key="normal" title="Start Virtual iBeacon"/>
+                                <connections>
+                                    <action selector="btnStartTapped:" destination="afq-x6-BYk" eventType="touchUpInside" id="UzB-70-hEu"/>
+                                    <action selector="btnStartTapped:" destination="azq-7T-1jH" eventType="touchUpInside" id="iB5-ZI-ob4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="66M-NT-MGr" firstAttribute="centerY" secondItem="Mch-Tp-uwB" secondAttribute="centerY" id="OpU-4N-Kps"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="92Y-x5-Uy1" secondAttribute="trailing" id="PpI-k4-eI0"/>
+                            <constraint firstItem="66M-NT-MGr" firstAttribute="centerX" secondItem="Mch-Tp-uwB" secondAttribute="centerX" id="U3L-AD-ZAq"/>
+                            <constraint firstItem="92Y-x5-Uy1" firstAttribute="top" secondItem="02G-OY-iM2" secondAttribute="bottom" constant="8" id="W30-bc-a17"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="92Y-x5-Uy1" secondAttribute="leading" id="dfj-Ui-H8r"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Virtual Beacon" id="b9C-HE-q8u"/>
+                    <connections>
+                        <outlet property="btnStart" destination="66M-NT-MGr" id="xrI-ZX-98u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IsW-a6-iX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1704" y="992"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="18i-3p-NP5">
+            <objects>
+                <tabBarController id="Fb9-GQ-LBE" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="nTc-9x-cWd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="azq-7T-1jH" kind="relationship" relationship="viewControllers" id="GBU-DT-LrA"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="kLZ-hI-myr"/>
+                        <segue destination="2R3-Em-9R4" kind="relationship" relationship="viewControllers" id="ER6-TP-Zvn"/>
+                        <segue destination="afq-x6-BYk" kind="relationship" relationship="viewControllers" id="S1N-kR-ZNw"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AtQ-2r-O4H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1379" y="196"/>
+        </scene>
+        <!--iBeacon Test-->
+        <scene sceneID="jCg-m8-dGr">
+            <objects>
+                <viewController id="2R3-Em-9R4" customClass="BeaconRViewController" customModule="BluComm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Eg4-UU-lfJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="0td-P9-im0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NxW-af-4Ek">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iBeacon Receiving Test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lsz-R8-xiS">
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76k-ha-p98">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lsz-R8-xiS" firstAttribute="top" secondItem="Eg4-UU-lfJ" secondAttribute="bottom" constant="8" id="6ta-5u-VOR"/>
+                            <constraint firstItem="0td-P9-im0" firstAttribute="top" secondItem="76k-ha-p98" secondAttribute="bottom" constant="8" id="BUQ-fY-9gs"/>
+                            <constraint firstItem="76k-ha-p98" firstAttribute="top" secondItem="Lsz-R8-xiS" secondAttribute="bottom" constant="8" id="CI7-zo-jS0"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="76k-ha-p98" secondAttribute="leading" id="PK2-Ry-l9f"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="76k-ha-p98" secondAttribute="trailing" id="gi5-M4-dLf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Lsz-R8-xiS" secondAttribute="trailing" id="j4a-Cs-N2Y"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Lsz-R8-xiS" secondAttribute="leading" id="kps-gq-rgK"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="iBeacon Test" id="ELP-D0-qSa"/>
+                    <connections>
+                        <outlet property="txtViewLog" destination="76k-ha-p98" id="ziX-M5-cGO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WhS-yZ-bZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-759.20000000000005" y="1134.7826086956522"/>
+        </scene>
+        <!--CBTest-->
+        <scene sceneID="EVs-Aj-1D9">
+            <objects>
+                <viewController id="azq-7T-1jH" customClass="CBTestViewController" customModule="BluComm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uyk-ez-uPd"/>
+                        <viewControllerLayoutGuide type="bottom" id="3IK-cj-N3s"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3iw-Mq-oo5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIb-VF-mvU">
+                                <state key="normal" title="Start Broadcasting"/>
+                                <connections>
+                                    <action selector="btnStartTapped:" destination="azq-7T-1jH" eventType="touchUpInside" id="3Xn-Dx-5pb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Core Bluetooth Test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Arr-nO-HVs">
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wIb-VF-mvU" firstAttribute="centerY" secondItem="3iw-Mq-oo5" secondAttribute="centerY" id="4ot-YI-jEV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Arr-nO-HVs" secondAttribute="trailing" id="WAl-uY-tae"/>
+                            <constraint firstItem="Arr-nO-HVs" firstAttribute="top" secondItem="uyk-ez-uPd" secondAttribute="bottom" constant="8" id="sTd-TJ-TvL"/>
+                            <constraint firstItem="wIb-VF-mvU" firstAttribute="centerX" secondItem="3iw-Mq-oo5" secondAttribute="centerX" id="vQ0-9E-Nkv"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Arr-nO-HVs" secondAttribute="leading" id="yHW-gy-EnT"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="CBTest" id="8YQ-04-Otr"/>
+                    <connections>
+                        <outlet property="btnStart" destination="wIb-VF-mvU" id="mNx-wK-yPp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pm3-Ix-JqQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="34" y="741"/>
+        </scene>
+    </scenes>
+</document>

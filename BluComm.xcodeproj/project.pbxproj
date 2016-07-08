@@ -1,0 +1,564 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		112F749E1D2D16CA004F1242 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F749D1D2D16CA004F1242 /* AppDelegate.swift */; };
+		112F74A31D2D16CA004F1242 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112F74A11D2D16CA004F1242 /* Main.storyboard */; };
+		112F74A51D2D16CA004F1242 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 112F74A41D2D16CA004F1242 /* Assets.xcassets */; };
+		112F74A81D2D16CA004F1242 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 112F74A61D2D16CA004F1242 /* LaunchScreen.storyboard */; };
+		112F74B31D2D16CA004F1242 /* BluCommTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F74B21D2D16CA004F1242 /* BluCommTests.swift */; };
+		112F74BE1D2D16CA004F1242 /* BluCommUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F74BD1D2D16CA004F1242 /* BluCommUITests.swift */; };
+		1133733C1D2E458A00D6EBE3 /* MCTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133733B1D2E458A00D6EBE3 /* MCTestViewController.swift */; };
+		1133733F1D2E5CCA00D6EBE3 /* CBTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133733E1D2E5CCA00D6EBE3 /* CBTestViewController.swift */; };
+		113373411D2E640E00D6EBE3 /* BeaconRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113373401D2E640E00D6EBE3 /* BeaconRViewController.swift */; };
+		113373451D2E9D7600D6EBE3 /* BeaconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113373441D2E9D7600D6EBE3 /* BeaconViewController.swift */; };
+		113373471D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113373461D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		112F74AF1D2D16CA004F1242 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 112F74921D2D16CA004F1242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112F74991D2D16CA004F1242;
+			remoteInfo = BluComm;
+		};
+		112F74BA1D2D16CA004F1242 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 112F74921D2D16CA004F1242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112F74991D2D16CA004F1242;
+			remoteInfo = BluComm;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		112F749A1D2D16CA004F1242 /* BluComm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluComm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		112F749D1D2D16CA004F1242 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		112F74A21D2D16CA004F1242 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		112F74A41D2D16CA004F1242 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		112F74A71D2D16CA004F1242 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		112F74A91D2D16CA004F1242 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		112F74AE1D2D16CA004F1242 /* BluCommTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BluCommTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		112F74B21D2D16CA004F1242 /* BluCommTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluCommTests.swift; sourceTree = "<group>"; };
+		112F74B41D2D16CA004F1242 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		112F74B91D2D16CA004F1242 /* BluCommUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BluCommUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		112F74BD1D2D16CA004F1242 /* BluCommUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluCommUITests.swift; sourceTree = "<group>"; };
+		112F74BF1D2D16CA004F1242 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1133733B1D2E458A00D6EBE3 /* MCTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTestViewController.swift; sourceTree = "<group>"; };
+		1133733E1D2E5CCA00D6EBE3 /* CBTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBTestViewController.swift; sourceTree = "<group>"; };
+		113373401D2E640E00D6EBE3 /* BeaconRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconRViewController.swift; sourceTree = "<group>"; };
+		113373431D2E7EB600D6EBE3 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		113373441D2E9D7600D6EBE3 /* BeaconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconViewController.swift; sourceTree = "<group>"; };
+		113373461D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
+		113373481D2EA85100D6EBE3 /* BluComm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluComm.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		112F74971D2D16CA004F1242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		112F74AB1D2D16CA004F1242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		112F74B61D2D16CA004F1242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		112F74911D2D16CA004F1242 = {
+			isa = PBXGroup;
+			children = (
+				113373431D2E7EB600D6EBE3 /* MyPlayground.playground */,
+				112F749C1D2D16CA004F1242 /* BluComm */,
+				112F74B11D2D16CA004F1242 /* BluCommTests */,
+				112F74BC1D2D16CA004F1242 /* BluCommUITests */,
+				112F749B1D2D16CA004F1242 /* Products */,
+				112F74CB1D2D1750004F1242 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		112F749B1D2D16CA004F1242 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				112F749A1D2D16CA004F1242 /* BluComm.app */,
+				112F74AE1D2D16CA004F1242 /* BluCommTests.xctest */,
+				112F74B91D2D16CA004F1242 /* BluCommUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		112F749C1D2D16CA004F1242 /* BluComm */ = {
+			isa = PBXGroup;
+			children = (
+				113373481D2EA85100D6EBE3 /* BluComm.entitlements */,
+				112F749D1D2D16CA004F1242 /* AppDelegate.swift */,
+				113373461D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift */,
+				1133733B1D2E458A00D6EBE3 /* MCTestViewController.swift */,
+				113373441D2E9D7600D6EBE3 /* BeaconViewController.swift */,
+				112F74A11D2D16CA004F1242 /* Main.storyboard */,
+				113373401D2E640E00D6EBE3 /* BeaconRViewController.swift */,
+				1133733E1D2E5CCA00D6EBE3 /* CBTestViewController.swift */,
+				112F74A41D2D16CA004F1242 /* Assets.xcassets */,
+				112F74A61D2D16CA004F1242 /* LaunchScreen.storyboard */,
+				112F74A91D2D16CA004F1242 /* Info.plist */,
+			);
+			path = BluComm;
+			sourceTree = "<group>";
+		};
+		112F74B11D2D16CA004F1242 /* BluCommTests */ = {
+			isa = PBXGroup;
+			children = (
+				112F74B21D2D16CA004F1242 /* BluCommTests.swift */,
+				112F74B41D2D16CA004F1242 /* Info.plist */,
+			);
+			path = BluCommTests;
+			sourceTree = "<group>";
+		};
+		112F74BC1D2D16CA004F1242 /* BluCommUITests */ = {
+			isa = PBXGroup;
+			children = (
+				112F74BD1D2D16CA004F1242 /* BluCommUITests.swift */,
+				112F74BF1D2D16CA004F1242 /* Info.plist */,
+			);
+			path = BluCommUITests;
+			sourceTree = "<group>";
+		};
+		112F74CB1D2D1750004F1242 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		112F74991D2D16CA004F1242 /* BluComm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 112F74C21D2D16CA004F1242 /* Build configuration list for PBXNativeTarget "BluComm" */;
+			buildPhases = (
+				112F74961D2D16CA004F1242 /* Sources */,
+				112F74971D2D16CA004F1242 /* Frameworks */,
+				112F74981D2D16CA004F1242 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BluComm;
+			productName = BluComm;
+			productReference = 112F749A1D2D16CA004F1242 /* BluComm.app */;
+			productType = "com.apple.product-type.application";
+		};
+		112F74AD1D2D16CA004F1242 /* BluCommTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 112F74C51D2D16CA004F1242 /* Build configuration list for PBXNativeTarget "BluCommTests" */;
+			buildPhases = (
+				112F74AA1D2D16CA004F1242 /* Sources */,
+				112F74AB1D2D16CA004F1242 /* Frameworks */,
+				112F74AC1D2D16CA004F1242 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				112F74B01D2D16CA004F1242 /* PBXTargetDependency */,
+			);
+			name = BluCommTests;
+			productName = BluCommTests;
+			productReference = 112F74AE1D2D16CA004F1242 /* BluCommTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		112F74B81D2D16CA004F1242 /* BluCommUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 112F74C81D2D16CA004F1242 /* Build configuration list for PBXNativeTarget "BluCommUITests" */;
+			buildPhases = (
+				112F74B51D2D16CA004F1242 /* Sources */,
+				112F74B61D2D16CA004F1242 /* Frameworks */,
+				112F74B71D2D16CA004F1242 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				112F74BB1D2D16CA004F1242 /* PBXTargetDependency */,
+			);
+			name = BluCommUITests;
+			productName = BluCommUITests;
+			productReference = 112F74B91D2D16CA004F1242 /* BluCommUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		112F74921D2D16CA004F1242 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Clarence Ji";
+				TargetAttributes = {
+					112F74991D2D16CA004F1242 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = G6TTA6H999;
+						DevelopmentTeamName = "Clarence Ji";
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					112F74AD1D2D16CA004F1242 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = G6TTA6H999;
+						DevelopmentTeamName = "Clarence Ji";
+						ProvisioningStyle = Automatic;
+						TestTargetID = 112F74991D2D16CA004F1242;
+					};
+					112F74B81D2D16CA004F1242 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = G6TTA6H999;
+						DevelopmentTeamName = "Clarence Ji";
+						ProvisioningStyle = Automatic;
+						TestTargetID = 112F74991D2D16CA004F1242;
+					};
+				};
+			};
+			buildConfigurationList = 112F74951D2D16CA004F1242 /* Build configuration list for PBXProject "BluComm" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 112F74911D2D16CA004F1242;
+			productRefGroup = 112F749B1D2D16CA004F1242 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				112F74991D2D16CA004F1242 /* BluComm */,
+				112F74AD1D2D16CA004F1242 /* BluCommTests */,
+				112F74B81D2D16CA004F1242 /* BluCommUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		112F74981D2D16CA004F1242 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				112F74A81D2D16CA004F1242 /* LaunchScreen.storyboard in Resources */,
+				112F74A51D2D16CA004F1242 /* Assets.xcassets in Resources */,
+				112F74A31D2D16CA004F1242 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		112F74AC1D2D16CA004F1242 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		112F74B71D2D16CA004F1242 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		112F74961D2D16CA004F1242 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1133733F1D2E5CCA00D6EBE3 /* CBTestViewController.swift in Sources */,
+				113373471D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift in Sources */,
+				113373451D2E9D7600D6EBE3 /* BeaconViewController.swift in Sources */,
+				1133733C1D2E458A00D6EBE3 /* MCTestViewController.swift in Sources */,
+				112F749E1D2D16CA004F1242 /* AppDelegate.swift in Sources */,
+				113373411D2E640E00D6EBE3 /* BeaconRViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		112F74AA1D2D16CA004F1242 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				112F74B31D2D16CA004F1242 /* BluCommTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		112F74B51D2D16CA004F1242 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				112F74BE1D2D16CA004F1242 /* BluCommUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		112F74B01D2D16CA004F1242 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112F74991D2D16CA004F1242 /* BluComm */;
+			targetProxy = 112F74AF1D2D16CA004F1242 /* PBXContainerItemProxy */;
+		};
+		112F74BB1D2D16CA004F1242 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112F74991D2D16CA004F1242 /* BluComm */;
+			targetProxy = 112F74BA1D2D16CA004F1242 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		112F74A11D2D16CA004F1242 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				112F74A21D2D16CA004F1242 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		112F74A61D2D16CA004F1242 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				112F74A71D2D16CA004F1242 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		112F74C01D2D16CA004F1242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		112F74C11D2D16CA004F1242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		112F74C31D2D16CA004F1242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BluComm/BluComm.entitlements;
+				INFOPLIST_FILE = BluComm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjlondon.BluComm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		112F74C41D2D16CA004F1242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BluComm/BluComm.entitlements;
+				INFOPLIST_FILE = BluComm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjlondon.BluComm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		112F74C61D2D16CA004F1242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BluCommTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjlondon.BluCommTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BluComm.app/BluComm";
+			};
+			name = Debug;
+		};
+		112F74C71D2D16CA004F1242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BluCommTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjlondon.BluCommTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BluComm.app/BluComm";
+			};
+			name = Release;
+		};
+		112F74C91D2D16CA004F1242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BluCommUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjlondon.BluCommUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = BluComm;
+			};
+			name = Debug;
+		};
+		112F74CA1D2D16CA004F1242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BluCommUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjlondon.BluCommUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = BluComm;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		112F74951D2D16CA004F1242 /* Build configuration list for PBXProject "BluComm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112F74C01D2D16CA004F1242 /* Debug */,
+				112F74C11D2D16CA004F1242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		112F74C21D2D16CA004F1242 /* Build configuration list for PBXNativeTarget "BluComm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112F74C31D2D16CA004F1242 /* Debug */,
+				112F74C41D2D16CA004F1242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		112F74C51D2D16CA004F1242 /* Build configuration list for PBXNativeTarget "BluCommTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112F74C61D2D16CA004F1242 /* Debug */,
+				112F74C71D2D16CA004F1242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		112F74C81D2D16CA004F1242 /* Build configuration list for PBXNativeTarget "BluCommUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112F74C91D2D16CA004F1242 /* Debug */,
+				112F74CA1D2D16CA004F1242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 112F74921D2D16CA004F1242 /* Project object */;
+}
