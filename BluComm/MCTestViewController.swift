@@ -21,13 +21,13 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     private var isAppInBackground = false
     
     private let kServiceType = "blucomm"
-    private var serviceStarted = false
+    var serviceStarted = (UIApplication.shared().delegate as! AppDelegate).serviceStarted
     private let myPeerID: MCPeerID = MCPeerID(displayName: UIDevice.current().name)
     var advertiser: MCNearbyServiceAdvertiser!
     var browser: MCNearbyServiceBrowser!
     
     lazy var session: MCSession = {
-        let session = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: .required)
+        let session = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
         session.delegate = self
         return session
     }()
@@ -36,7 +36,7 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         super.viewDidLoad()
         
         // App Goes to Background Notification
-        let notificationCenter = NotificationCenter.default()
+        let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: .UIApplicationWillResignActive, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: .UIApplicationWillEnterForeground, object: nil)
 
@@ -46,15 +46,29 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         
         self.txtFieldMsg.addTarget(self, action: #selector(MCTestViewController.textFieldDidChange(_:)), for: .editingChanged)
         
-        self.advertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: kServiceType)
+        let appDelegate = UIApplication.shared().delegate as! AppDelegate
+        appDelegate.mcController = self
+        if appDelegate.blucommMCAdvertiser == nil {
+            
+            self.advertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: kServiceType)
+            self.browser = MCNearbyServiceBrowser(peer: myPeerID, serviceType: kServiceType)
+            self.advertiser.delegate = self
+            self.browser.delegate = self
+            
+            appDelegate.blucommMCAdvertiser = advertiser
+            appDelegate.blucommMCBrowser = browser
+            appDelegate.blucommMCSession = session
+            
+        } else {
+            
+            self.advertiser = appDelegate.blucommMCAdvertiser
+            self.browser = appDelegate.blucommMCBrowser
+            if let storedSession = appDelegate.blucommMCSession {
+                self.session = storedSession
+            }
+            
+        }
         
-        self.browser = MCNearbyServiceBrowser(peer: myPeerID, serviceType: kServiceType)
-        
-        self.advertiser.delegate = self
-//        self.advertiser.startAdvertisingPeer()
-        
-        self.browser.delegate = self
-//        self.browser.startBrowsingForPeers()
         
     }
     
@@ -80,21 +94,6 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     }
     
     // MARK: - Advertiser
-
-//    func initAdvertiser() {
-//        
-//        self.myPeerID = MCPeerID(displayName: self.txtFieldName.text == "" ? "Anonymous" : self.txtFieldName.text!)
-//        
-//        self.session = MCSession(peer: myPeerID!, securityIdentity: nil, encryptionPreference: .required)
-//        session?.delegate = self
-//        
-//        self.advertiser = MCNearbyServiceAdvertiser(peer: self.myPeerID!, discoveryInfo: nil, serviceType: kServiceType)
-//        self.advertiser?.delegate = self
-//        self.advertiser?.startAdvertisingPeer()
-//        
-//        addTextToLog(text: "✅ Advertiser initiated")
-//        
-//    }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: (Bool, MCSession?) -> Void) {
         
@@ -116,25 +115,11 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         
     }
     
-    func terminateAdvertiser() {
-        self.advertiser?.stopAdvertisingPeer()
-        addTextToLog(text: "❌ Advertiser terminated")
-    }
-    
     // MARK: - Browser
-    
-//    func initBrowser() {
-//        
-//        self.browser = MCNearbyServiceBrowser(peer: self.myPeerID!, serviceType: kServiceType)
-//        browser?.delegate = self
-//        
-//        addTextToLog(text: "✅ Browser initiated")
-//        
-//    }
-    
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         
         addTextToLog(text: "💯 Found Peer: \(peerID.displayName)")
+        self.btnRefreshTapped(self)
         
         /*
          
@@ -156,12 +141,8 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         
         addTextToLog(text: "☢️ Lost Peer: \(peerID.displayName)")
+        self.btnRefreshTapped(self)
         
-    }
-    
-    func terminateBrowser() {
-        self.browser?.stopBrowsingForPeers()
-        addTextToLog(text: "❌ Browser terminated")
     }
     
     // MARK: - Button Actions
@@ -170,8 +151,6 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         
         if !serviceStarted {
             serviceStarted = true
-//            self.initAdvertiser()
-//            self.initBrowser()
             advertiser.startAdvertisingPeer()
             browser.startBrowsingForPeers()
             DispatchQueue.main.async(execute: {
@@ -179,8 +158,8 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
             })
         } else {
             serviceStarted = false
-//            self.terminateBrowser()
-//            self.terminateAdvertiser()
+            self.sendMessageToPeers(text: "has left the chat.")
+            session.disconnect()
             advertiser.stopAdvertisingPeer()
             browser.stopBrowsingForPeers()
             
@@ -191,24 +170,31 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         
     }
     
+    func sendMessageToPeers(text: String) {
+        
+        let string = text
+        let data = string.data(using: .utf8)!
+        
+        do {
+            try session.send(data, toPeers: self.session.connectedPeers, with: .reliable)
+            addTextToLog(text: "Me: \(string)")
+            
+            DispatchQueue.main.async(execute: {
+                self.txtFieldMsg.text = ""
+                self.btnSend.isEnabled = false
+            })
+            
+        } catch {
+            print(error)
+            addTextToLog(text: "\(error)")
+        }
+        
+    }
+    
     @IBAction func btnSendTapped(_ sender: AnyObject) {
         
         if txtFieldMsg.text != "" {
-            let string = txtFieldMsg.text!
-            let data = string.data(using: .utf8)!
-            do {
-                try session.send(data, toPeers: self.session.connectedPeers, with: .reliable)
-                addTextToLog(text: "Me: \(string)")
-                
-                DispatchQueue.main.async(execute: { 
-                    self.txtFieldMsg.text = ""
-                    self.btnSend.isEnabled = false
-                })
-                
-            } catch {
-                print(error)
-                addTextToLog(text: "\(error)")
-            }
+            self.sendMessageToPeers(text: txtFieldMsg.text!)
         }
         
     }
@@ -234,17 +220,11 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     
     // MARK: - Session Delegate
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        addTextToLog(text: "Peer status changed: \(state.rawValue)")
+        addTextToLog(text: "Peer \(peerID.displayName) status changed: \(state.rawValue)")
+        self.btnRefreshTapped(self)
         if state.rawValue == 2 {
             // Connected
             addTextToLog(text: "\(peerID.displayName) says hello!")
-            let string = "Hello"
-            let data = string.data(using: .utf8)!
-            do {
-                try session.send(data, toPeers: [peerID], with: .reliable)
-            } catch {
-                addTextToLog(text: "\(error)")
-            }
         }
     }
     

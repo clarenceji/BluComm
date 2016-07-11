@@ -8,15 +8,23 @@
 
 import UIKit
 import CoreLocation
+import MultipeerConnectivity
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let userDefaults = UserDefaults.standard()
+    let userDefaults = UserDefaults.standard
     var locationManager: CLLocationManager?
 
+    var backgroundTask: UIBackgroundTaskIdentifier!
+    var blucommMCAdvertiser: MCNearbyServiceAdvertiser?
+    var blucommMCBrowser: MCNearbyServiceBrowser?
+    var blucommMCSession: MCSession?
+    
+    var serviceStarted = false
+    var mcController: MCTestViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -46,7 +54,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationManager!.delegate = self
         locationManager!.pausesLocationUpdatesAutomatically = false
         
-        locationManager?.allowsBackgroundLocationUpdates = true
+        if #available(iOS 9.0, *) {
+            locationManager!.allowsBackgroundLocationUpdates = true
+        } else {
+            // Fallback on earlier versions
+        }
 
         locationManager!.startMonitoring(for: beaconRegion)
         locationManager!.startRangingBeacons(in: beaconRegion)
@@ -61,6 +73,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        self.backgroundTask = application.beginBackgroundTask(expirationHandler: { 
+            
+            // Terminate Multipeer Connectivity
+            print("AppDelegate: Stop Multipeer Connectivity now.")
+            self.mcController?.sendMessageToPeers(text: "has left the chat")
+            self.blucommMCSession?.disconnect()
+            self.blucommMCAdvertiser?.stopAdvertisingPeer()
+            self.blucommMCBrowser?.stopBrowsingForPeers()
+            
+            self.serviceStarted = false
+            
+            application.endBackgroundTask(self.backgroundTask)
+            self.backgroundTask = UIBackgroundTaskInvalid
+            
+        })
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -69,6 +98,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        print("AppDelegate: Resume Multipeer Connectivity now.")
+        if mcController?.btnStart.titleLabel?.text == "Stop" {
+            self.blucommMCAdvertiser?.startAdvertisingPeer()
+            self.blucommMCBrowser?.startBrowsingForPeers()
+            
+            self.serviceStarted = true
+        }
+        self.backgroundTask = UIBackgroundTaskInvalid
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
