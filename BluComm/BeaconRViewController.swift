@@ -37,7 +37,7 @@ class BeaconRViewController: UIViewController, CBCentralManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : AnyObject]) {
+    private func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : AnyObject]) {
         
     }
     
@@ -78,7 +78,7 @@ class BeaconRViewController: UIViewController, CBCentralManagerDelegate {
         }
     }
     
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : AnyObject], rssi RSSI: NSNumber) {
+    private func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : AnyObject], rssi RSSI: NSNumber) {
         addTextToLog(text: "Discovered, RSSI: \(RSSI.intValue)")
     }
     
@@ -99,6 +99,10 @@ class BeaconRViewController: UIViewController, CBCentralManagerDelegate {
             let newString = text + "\n===================\n" + self.txtViewLog.text
             self.txtViewLog.text = newString
         }
+        
+    }
+    
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         
     }
 

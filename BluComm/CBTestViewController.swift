@@ -14,7 +14,7 @@ class CBTestViewController: UIViewController, CBPeripheralManagerDelegate {
 
     @IBOutlet var btnStart: UIButton!
     
-    private let kAdvertisingData: [String: AnyObject] = [
+    private let kAdvertisingData: [String: Any] = [
 //        CBAdvertisementDataLocalNameKey: "blucomm",
         CBAdvertisementDataServiceUUIDsKey: [CBUUID(nsuuid: UUID(uuidString: "29B74DA3-3F85-4644-9E96-9D5A3FDEB410")!)]
     ]
@@ -28,17 +28,17 @@ class CBTestViewController: UIViewController, CBPeripheralManagerDelegate {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: [
-            CBPeripheralManagerOptionRestoreIdentifierKey: "com.cjlondon.blucomm.cbperipheralmanager"
-            ])
+//        peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: [
+//            CBPeripheralManagerOptionRestoreIdentifierKey: "com.cjlondon.blucomm.cbperipheralmanager"
+//            ])
         
     }
     
-    func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : AnyObject]) {
+    private func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : AnyObject]) {
         
     }
     
-    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: NSError?) {
+    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
         print("Peripheral did start advertising")
         if error != nil {
             print(error!)

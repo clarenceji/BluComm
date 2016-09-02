@@ -9,10 +9,11 @@
 import UIKit
 import CoreLocation
 import MultipeerConnectivity
+import CoreBluetooth
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate {
+    
     var window: UIWindow?
     
     let userDefaults = UserDefaults.standard
@@ -26,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var serviceStarted = false
     var mcController: MCTestViewController?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         setUpiBeacon()
@@ -124,6 +125,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             currentVC.present(alertView, animated: true, completion: nil)
         }
+        
+    }
+    
+    /*!
+     *  @method centralManagerDidUpdateState:
+     *
+     *  @param central  The central manager whose state has changed.
+     *
+     *  @discussion     Invoked whenever the central manager's state has been updated. Commands should only be issued when the state is
+     *                  <code>CBCentralManagerStatePoweredOn</code>. A state below <code>CBCentralManagerStatePoweredOn</code>
+     *                  implies that scanning has stopped and any connected peripherals have been disconnected. If the state moves below
+     *                  <code>CBCentralManagerStatePoweredOff</code>, all <code>CBPeripheral</code> objects obtained from this central
+     *                  manager become invalid and must be retrieved or discovered again.
+     *
+     *  @see            state
+     *
+     */
+    @available(iOS 5.0, *)
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        
+    }
+    
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         
     }
 

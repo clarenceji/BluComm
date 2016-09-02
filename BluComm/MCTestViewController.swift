@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate, UITextFieldDelegate {
+class MCTestViewController: UIViewController, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UITextFieldDelegate {
 
     @IBOutlet var txtFieldName: UITextField!
     @IBOutlet var txtFieldMsg: UITextField!
@@ -21,8 +21,8 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     private var isAppInBackground = false
     
     private let kServiceType = "blucomm"
-    var serviceStarted = (UIApplication.shared().delegate as! AppDelegate).serviceStarted
-    private let myPeerID: MCPeerID = MCPeerID(displayName: UIDevice.current().name)
+    var serviceStarted = (UIApplication.shared.delegate as! AppDelegate).serviceStarted
+    private let myPeerID: MCPeerID = MCPeerID(displayName: UIDevice.current.name)
     var advertiser: MCNearbyServiceAdvertiser!
     var browser: MCNearbyServiceBrowser!
     
@@ -46,7 +46,7 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         
         self.txtFieldMsg.addTarget(self, action: #selector(MCTestViewController.textFieldDidChange(_:)), for: .editingChanged)
         
-        let appDelegate = UIApplication.shared().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.mcController = self
         if appDelegate.blucommMCAdvertiser == nil {
             
@@ -94,25 +94,23 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     }
     
     // MARK: - Advertiser
-    
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: (Bool, MCSession?) -> Void) {
-        
+    @available(iOS 7.0, *)
+    public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         addTextToLog(text: "💌 Invitation Received from Peer: \(peerID.displayName)")
         
         /*
          
-        let alertView = UIAlertController(title: "Inivation Received!", message: "Peer name: \(peerID.displayName)", preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "Accept", style: .default, handler: { (aa) in
-            invitationHandler(true, self.session)
-        }))
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(alertView, animated: true, completion: nil)
-        
-        */
+         let alertView = UIAlertController(title: "Inivation Received!", message: "Peer name: \(peerID.displayName)", preferredStyle: .alert)
+         alertView.addAction(UIAlertAction(title: "Accept", style: .default, handler: { (aa) in
+         invitationHandler(true, self.session)
+         }))
+         alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+         
+         self.present(alertView, animated: true, completion: nil)
+         
+         */
         
         invitationHandler(true, self.session)
-        
     }
     
     // MARK: - Browser
@@ -204,7 +202,7 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
         DispatchQueue.main.async { 
             self.labelConnCount.text = "Connected: \(count)"
         }
-        addTextToLog(text: String(session.connectedPeers))
+        addTextToLog(text: String(describing: session.connectedPeers))
     }
     
     private func addTextToLog(text: String) {
@@ -243,7 +241,7 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
             notification.category = "blucomm.multipeerconn"
             notification.alertBody = peerID.displayName + ": " + string!
             notification.soundName = UILocalNotificationDefaultSoundName
-            UIApplication.shared().scheduleLocalNotification(notification)
+            UIApplication.shared.scheduleLocalNotification(notification)
             
         }
         
@@ -265,7 +263,7 @@ class MCTestViewController: UIViewController, MCNearbyServiceAdvertiserDelegate,
     // Finished receiving a resource from remote peer and saved the content
     // in a temporary location - the app is responsible for moving the file
     // to a permanent location within its sandbox.
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: NSError?) {
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
         
     }
 

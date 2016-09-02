@@ -16,7 +16,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         notification.category = "blucomm.ibeacon"
         notification.alertBody = message
         notification.soundName = UILocalNotificationDefaultSoundName
-        UIApplication.shared().scheduleLocalNotification(notification)
+        UIApplication.shared.scheduleLocalNotification(notification)
     }
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
