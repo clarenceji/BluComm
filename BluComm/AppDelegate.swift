@@ -26,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate 
     
     var serviceStarted = false
     var mcController: MCTestViewController?
-
-    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         // Override point for customization after application launch.
         
         setUpiBeacon()
@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate 
     }
     
     private func setUpiBeacon() {
+        
         let uuidString = "29B74DA3-3F85-4644-9E96-9D5A3FDEB410"
         let beaconIdentifier = "blucomm"
         let beaconUUID = UUID(uuidString: uuidString)
@@ -63,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate 
 
         locationManager!.startMonitoring(for: beaconRegion)
         locationManager!.startRangingBeacons(in: beaconRegion)
-        // locationManager!.startUpdatingLocation()
+
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
