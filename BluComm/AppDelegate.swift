@@ -12,13 +12,14 @@ import MultipeerConnectivity
 import CoreBluetooth
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
     let userDefaults = UserDefaults.standard
     var locationManager: CLLocationManager?
 
+    // Variables storing Multipeer Connectivity managers
     var backgroundTask: UIBackgroundTaskIdentifier!
     var blucommMCAdvertiser: MCNearbyServiceAdvertiser?
     var blucommMCBrowser: MCNearbyServiceBrowser?
@@ -28,10 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate 
     var mcController: MCTestViewController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        // Override point for customization after application launch.
         
-        setUpiBeacon()
+        startMonitoringBeacons()
         
+        // Setup Local Notification
         let notificationCategory:UIMutableUserNotificationCategory = UIMutableUserNotificationCategory()
         notificationCategory.identifier = "blucomm.notifications.general"
         
@@ -40,57 +41,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate 
         
         return true
     }
-    
-    private func setUpiBeacon() {
-        
-        let uuidString = "29B74DA3-3F85-4644-9E96-9D5A3FDEB410"
-        let beaconIdentifier = "blucomm"
-        let beaconUUID = UUID(uuidString: uuidString)
-        let beaconRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!,
-                                                         identifier: beaconIdentifier)
-        
-        locationManager = CLLocationManager()
-        if(locationManager!.responds(to: #selector(CLLocationManager.requestAlwaysAuthorization))) {
-            locationManager!.requestAlwaysAuthorization()
-        }
-        locationManager!.delegate = self
-        locationManager!.pausesLocationUpdatesAutomatically = false
-        
-        if #available(iOS 9.0, *) {
-            locationManager!.allowsBackgroundLocationUpdates = true
-        } else {
-            // Fallback on earlier versions
-        }
-
-        locationManager!.startMonitoring(for: beaconRegion)
-        locationManager!.startRangingBeacons(in: beaconRegion)
-
-    }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-        self.backgroundTask = application.beginBackgroundTask(expirationHandler: { 
-            
-            // Terminate Multipeer Connectivity
-            print("AppDelegate: Stop Multipeer Connectivity now.")
-            self.mcController?.sendMessageToPeers(text: "has left the chat")
-            self.blucommMCSession?.disconnect()
-            self.blucommMCAdvertiser?.stopAdvertisingPeer()
-            self.blucommMCBrowser?.stopBrowsingForPeers()
-            
-            self.serviceStarted = false
-            
-            application.endBackgroundTask(self.backgroundTask)
-            self.backgroundTask = UIBackgroundTaskInvalid
-            
-        })
+        self.terminateMultipeer(application)
         
     }
 
@@ -118,6 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate 
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         
+        // If app is not in background, present an alert view stating there's iBeacon found.
         if notification.category == "blucomm.ibeacon" {
             let currentVC = self.window!.rootViewController! as UIViewController
             
@@ -128,21 +87,121 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate 
         }
         
     }
+
+}
+
+
+// MARK: - Monitor Nearby iBeacons
+extension AppDelegate {
     
-    /*!
-     *  @method centralManagerDidUpdateState:
-     *
-     *  @param central  The central manager whose state has changed.
-     *
-     *  @discussion     Invoked whenever the central manager's state has been updated. Commands should only be issued when the state is
-     *                  <code>CBCentralManagerStatePoweredOn</code>. A state below <code>CBCentralManagerStatePoweredOn</code>
-     *                  implies that scanning has stopped and any connected peripherals have been disconnected. If the state moves below
-     *                  <code>CBCentralManagerStatePoweredOff</code>, all <code>CBPeripheral</code> objects obtained from this central
-     *                  manager become invalid and must be retrieved or discovered again.
-     *
-     *  @see            state
-     *
-     */
+    /// Start monitoring nearby beacons with fixed beacon ID
+    fileprivate func startMonitoringBeacons() {
+        
+        // Setup properties of iBeacons to be monitored
+        let uuidString = "29B74DA3-3F85-4644-9E96-9D5A3FDEB410"
+        let beaconIdentifier = "blucomm"
+        let beaconUUID = UUID(uuidString: uuidString)
+        let beaconRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!,
+                                                         identifier: beaconIdentifier)
+        
+        // Setup location manager and request user permission
+        locationManager = CLLocationManager()
+        if(locationManager!.responds(to: #selector(CLLocationManager.requestAlwaysAuthorization))) {
+            locationManager!.requestAlwaysAuthorization()
+        }
+        locationManager!.delegate = self
+        
+        // Prevent beacon updates from being paused so beacons can still be ranged when not in app
+        locationManager!.pausesLocationUpdatesAutomatically = false
+        if #available(iOS 9.0, *) {
+            locationManager!.allowsBackgroundLocationUpdates = true
+        } else {
+            // TODO: Fallback on earlier versions
+        }
+        
+        // Start monitoring
+        locationManager!.startMonitoring(for: beaconRegion)
+        locationManager!.startRangingBeacons(in: beaconRegion)
+        
+    }
+    
+}
+
+// MARK: - Multipeer Connectivity Related
+extension AppDelegate {
+    
+    /// Terminate Multipeer Connectivity **when the app is killed by system** (when in background).
+    ///
+    /// - Parameter application: This should be passed from ```applicationDidEnterBackground(_:)``` method
+    fileprivate func terminateMultipeer(_ application: UIApplication) {
+        
+        self.backgroundTask = application.beginBackgroundTask(expirationHandler: {
+            
+            print("AppDelegate: Stop Multipeer Connectivity now.")
+            // Send termination message to peers
+            self.mcController?.sendMessageToPeers(text: "has left the chat")
+            // Disconnect from current session
+            self.blucommMCSession?.disconnect()
+            // Stop advertising and browsing peers
+            self.blucommMCAdvertiser?.stopAdvertisingPeer()
+            self.blucommMCBrowser?.stopBrowsingForPeers()
+            
+            self.serviceStarted = false
+            
+            application.endBackgroundTask(self.backgroundTask)
+            self.backgroundTask = UIBackgroundTaskInvalid
+            
+        })
+        
+    }
+    
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+    
+    /// Send a local notification to user
+    ///
+    /// - Parameter message: Message to be presented in the notification
+    fileprivate func sendLocalNotificationWithMessage(message: String!) {
+        
+        let notification:UILocalNotification = UILocalNotification()
+        notification.category = "blucomm.ibeacon"
+        notification.alertBody = message
+        notification.soundName = UILocalNotificationDefaultSoundName
+        UIApplication.shared.scheduleLocalNotification(notification)
+        
+    }
+    
+    internal func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        
+        // If there is beacon nearby, send local notification to user every 60 seconds.
+        if beacons.count > 0 {
+            
+            let currentTime = Int(NSDate().timeIntervalSince1970)
+            
+            // Get the saved time when last time a (multiple) beacon(s) is/are ranged
+            let savedTime = userDefaults.integer(forKey: "blucomm.savedtime")
+            
+            // If the difference between times is greater than 1 minute, then send local notification
+            if (currentTime - savedTime) > 60 {
+                
+                // Send local notification
+                sendLocalNotificationWithMessage(message: "BluComm user nearby, open the app for details.")
+                // Save the current time for next iteration
+                userDefaults.set(currentTime, forKey: "blucomm.savedtime")
+                
+            }
+            
+        }
+        
+    }
+    
+    
+}
+
+// MARK: - Core Bluetooth Central Manager Delegate
+extension AppDelegate: CBCentralManagerDelegate {
+    
     @available(iOS 5.0, *)
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         
@@ -151,7 +210,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate 
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
         
     }
-
-
+    
 }
 

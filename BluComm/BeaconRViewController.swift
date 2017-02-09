@@ -10,50 +10,36 @@ import UIKit
 import CoreLocation
 import CoreBluetooth
 
+/**
+ Determines the distance between the current device and an iBeacon.
+ 
+ This requires two iOS devices, one acting as a "virtual iBeacon" and the other receiving.
+ 
+ This class makes use of CBCentralManager (Core Bluetooth)
+ */
 class BeaconRViewController: UIViewController, CBCentralManagerDelegate {
 
     @IBOutlet var txtViewLog: UITextView!
     
-//    var locationManager: CLLocationManager!
     var centralManager: CBCentralManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        locationManager = CLLocationManager()
-//        locationManager.delegate = self
-//        locationManager.requestAlwaysAuthorization()
-        
         centralManager = CBCentralManager(delegate: self, queue: nil, options: [
             CBCentralManagerOptionRestoreIdentifierKey: "com.cjlondon.blucomm.cbcentralmanager"
             ])
         
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     private func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : AnyObject]) {
         
     }
     
-//    private func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-//        if status == .authorizedAlways {
-//            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
-//                if CLLocationManager.isRangingAvailable() {
-//                    startScanning()
-//                }
-//            }
-//        }
-//    }
-    
     func startScanning() {
         let uuid = UUID(uuidString: "29B74DA3-3F85-4644-9E96-9D5A3FDEB410")!
-//        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, major: 123, minor: 456, identifier: "blucomm")
         
         let scanOptions = [
             CBCentralManagerScanOptionAllowDuplicatesKey: true
@@ -81,16 +67,6 @@ class BeaconRViewController: UIViewController, CBCentralManagerDelegate {
     private func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : AnyObject], rssi RSSI: NSNumber) {
         addTextToLog(text: "Discovered, RSSI: \(RSSI.intValue)")
     }
-    
-//    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-//        print("Did Range Beacons")
-//        if beacons.count > 0 {
-//            let beacon = beacons[0] 
-//            addTextToLog(text: beacon.proximity.stringValue())
-//        } else {
-//            addTextToLog(text: "unknown")
-//        }
-//    }
 
     private func addTextToLog(text: String) {
         

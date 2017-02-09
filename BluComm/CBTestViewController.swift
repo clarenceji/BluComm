@@ -15,7 +15,6 @@ class CBTestViewController: UIViewController, CBPeripheralManagerDelegate {
     @IBOutlet var btnStart: UIButton!
     
     private let kAdvertisingData: [String: Any] = [
-//        CBAdvertisementDataLocalNameKey: "blucomm",
         CBAdvertisementDataServiceUUIDsKey: [CBUUID(nsuuid: UUID(uuidString: "29B74DA3-3F85-4644-9E96-9D5A3FDEB410")!)]
     ]
     
@@ -26,12 +25,6 @@ class CBTestViewController: UIViewController, CBPeripheralManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-//        peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: [
-//            CBPeripheralManagerOptionRestoreIdentifierKey: "com.cjlondon.blucomm.cbperipheralmanager"
-//            ])
-        
     }
     
     private func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : AnyObject]) {
@@ -73,16 +66,6 @@ class CBTestViewController: UIViewController, CBPeripheralManagerDelegate {
         }
         
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

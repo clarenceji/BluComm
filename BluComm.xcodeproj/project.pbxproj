@@ -17,7 +17,6 @@
 		1133733F1D2E5CCA00D6EBE3 /* CBTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133733E1D2E5CCA00D6EBE3 /* CBTestViewController.swift */; };
 		113373411D2E640E00D6EBE3 /* BeaconRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113373401D2E640E00D6EBE3 /* BeaconRViewController.swift */; };
 		113373451D2E9D7600D6EBE3 /* BeaconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113373441D2E9D7600D6EBE3 /* BeaconViewController.swift */; };
-		113373471D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113373461D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +52,7 @@
 		1133733B1D2E458A00D6EBE3 /* MCTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTestViewController.swift; sourceTree = "<group>"; };
 		1133733E1D2E5CCA00D6EBE3 /* CBTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBTestViewController.swift; sourceTree = "<group>"; };
 		113373401D2E640E00D6EBE3 /* BeaconRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconRViewController.swift; sourceTree = "<group>"; };
-		113373431D2E7EB600D6EBE3 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		113373441D2E9D7600D6EBE3 /* BeaconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconViewController.swift; sourceTree = "<group>"; };
-		113373461D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		113373481D2EA85100D6EBE3 /* BluComm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BluComm.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +84,6 @@
 		112F74911D2D16CA004F1242 = {
 			isa = PBXGroup;
 			children = (
-				113373431D2E7EB600D6EBE3 /* MyPlayground.playground */,
 				112F749C1D2D16CA004F1242 /* BluComm */,
 				112F74B11D2D16CA004F1242 /* BluCommTests */,
 				112F74BC1D2D16CA004F1242 /* BluCommUITests */,
@@ -111,12 +107,11 @@
 			children = (
 				113373481D2EA85100D6EBE3 /* BluComm.entitlements */,
 				112F749D1D2D16CA004F1242 /* AppDelegate.swift */,
-				113373461D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift */,
+				1133733E1D2E5CCA00D6EBE3 /* CBTestViewController.swift */,
 				1133733B1D2E458A00D6EBE3 /* MCTestViewController.swift */,
+				113373401D2E640E00D6EBE3 /* BeaconRViewController.swift */,
 				113373441D2E9D7600D6EBE3 /* BeaconViewController.swift */,
 				112F74A11D2D16CA004F1242 /* Main.storyboard */,
-				113373401D2E640E00D6EBE3 /* BeaconRViewController.swift */,
-				1133733E1D2E5CCA00D6EBE3 /* CBTestViewController.swift */,
 				112F74A41D2D16CA004F1242 /* Assets.xcassets */,
 				112F74A61D2D16CA004F1242 /* LaunchScreen.storyboard */,
 				112F74A91D2D16CA004F1242 /* Info.plist */,
@@ -295,7 +290,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1133733F1D2E5CCA00D6EBE3 /* CBTestViewController.swift in Sources */,
-				113373471D2EA17000D6EBE3 /* AppDelegate+CLLocationManagerDelegate.swift in Sources */,
 				113373451D2E9D7600D6EBE3 /* BeaconViewController.swift in Sources */,
 				1133733C1D2E458A00D6EBE3 /* MCTestViewController.swift in Sources */,
 				112F749E1D2D16CA004F1242 /* AppDelegate.swift in Sources */,

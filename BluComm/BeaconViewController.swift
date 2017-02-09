@@ -10,6 +10,13 @@ import UIKit
 import CoreBluetooth
 import CoreLocation
 
+/**
+ Turns the current device into a virtual iBeacon.
+ 
+ The virtual iBeacon broadcasts same information setup in the AppDelegate (```UUID```, ```major``` and ```minor``` values).
+ 
+ This class mainly uses ```CoreBluetooth``` framework, however, constructing the beacon requires ```CoreLocation``` framework.
+ */
 class BeaconViewController: UIViewController, CBPeripheralManagerDelegate {
 
     @IBOutlet var btnStart: UIButton!
@@ -20,13 +27,6 @@ class BeaconViewController: UIViewController, CBPeripheralManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func btnStartTapped(_ sender: AnyObject) {
@@ -45,18 +45,6 @@ class BeaconViewController: UIViewController, CBPeripheralManagerDelegate {
         
     }
     
-    func initBeacon() {
-        let localBeaconUUID = "29B74DA3-3F85-4644-9E96-9D5A3FDEB410"
-        let localBeaconMajor: CLBeaconMajorValue = 1529
-        let localBeaconMinor: CLBeaconMinorValue = 5830
-        
-        let uuid = UUID(uuidString: localBeaconUUID)!
-        localBeacon = CLBeaconRegion(proximityUUID: uuid, major: localBeaconMajor, minor: localBeaconMinor, identifier: "blucomm")
-        
-        beaconPeripheralData = localBeacon.peripheralData(withMeasuredPower: nil)
-        peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
-    }
-    
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         
         if peripheral.state == .poweredOn {
@@ -67,6 +55,19 @@ class BeaconViewController: UIViewController, CBPeripheralManagerDelegate {
             peripheralManager.stopAdvertising()
         }
         
+    }
+    
+    
+    private func initBeacon() {
+        let localBeaconUUID = "29B74DA3-3F85-4644-9E96-9D5A3FDEB410"
+        let localBeaconMajor: CLBeaconMajorValue = 1529
+        let localBeaconMinor: CLBeaconMinorValue = 5830
+        
+        let uuid = UUID(uuidString: localBeaconUUID)!
+        localBeacon = CLBeaconRegion(proximityUUID: uuid, major: localBeaconMajor, minor: localBeaconMinor, identifier: "blucomm")
+        
+        beaconPeripheralData = localBeacon.peripheralData(withMeasuredPower: nil)
+        peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
     }
     
 

@@ -96,21 +96,11 @@ class MCTestViewController: UIViewController, MCNearbyServiceBrowserDelegate, MC
     // MARK: - Advertiser
     @available(iOS 7.0, *)
     public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        
         addTextToLog(text: "💌 Invitation Received from Peer: \(peerID.displayName)")
         
-        /*
-         
-         let alertView = UIAlertController(title: "Inivation Received!", message: "Peer name: \(peerID.displayName)", preferredStyle: .alert)
-         alertView.addAction(UIAlertAction(title: "Accept", style: .default, handler: { (aa) in
-         invitationHandler(true, self.session)
-         }))
-         alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-         
-         self.present(alertView, animated: true, completion: nil)
-         
-         */
-        
         invitationHandler(true, self.session)
+        
     }
     
     // MARK: - Browser
@@ -118,18 +108,6 @@ class MCTestViewController: UIViewController, MCNearbyServiceBrowserDelegate, MC
         
         addTextToLog(text: "💯 Found Peer: \(peerID.displayName)")
         self.btnRefreshTapped(self)
-        
-        /*
-         
-        let alertView = UIAlertController(title: "Found Peer!", message: "Peer name: \(peerID.displayName)", preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "Invite", style: .default, handler: { (aa) in
-            browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
-        }))
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(alertView, animated: true, completion: nil)
-        
-        */
  
         browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
         
